@@ -8,7 +8,7 @@ import java.net.http.HttpResponse;
 
 public class ConsumirAPI {
 
-    Monedas encontrarValor(String moneda) throws IOException, InterruptedException {
+    Double encontrarValor(String moneda) throws IOException, InterruptedException {
         URI direccion = URI.create("https://v6.exchangerate-api.com/v6/fc33ae91f7a56e3bc0f73fd0/latest/USD");
 
         HttpClient client = HttpClient.newHttpClient();
@@ -23,9 +23,10 @@ public class ConsumirAPI {
         Monedas respuesta = new Gson().fromJson(response.body(), Monedas.class);
 
         Map<String, Double> conversionRates = respuesta.conversion_rates();
-        Double valor = conversionRates.get(moneda);
 
-        if (valor != null) {
+        return conversionRates.get(moneda);
+
+       /* if (valor != null) {
             System.out.println("El valor de " + moneda + " es: " + valor);
         } else {
             System.out.println("La clave " + moneda + " no se encuentra en el mapa.");
@@ -34,8 +35,10 @@ public class ConsumirAPI {
 
         System.out.println("monedas " + respuesta.conversion_rates());
 
-        return new Gson().fromJson(response.body(), Monedas.class);
+        return new Gson().fromJson(response.body(), Monedas.class); */
     }
+
+
 
 
 
